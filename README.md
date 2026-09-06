@@ -1,10 +1,10 @@
-# TravelSphere
+# Travel Sphere
 
-TravelSphere is a social travel platform designed to help travelers discover destinations, share travel experiences, connect with other travelers, and maintain their travel information in one place.
+Travel Sphere is a social travel platform designed to help travelers discover destinations, share travel experiences, connect with other travelers, and maintain their travel information in one place.
 
 ## Overview
 
-Planning and documenting travel often requires users to switch between multiple platforms for destination discovery, travel posts, social connections, and travel information. TravelSphere brings these core activities together in a single platform.
+Planning and documenting travel often requires users to switch between multiple platforms for destination discovery, travel posts, social connections, and travel information. Travel Sphere brings these core activities together in a single platform.
 
 The project follows a client-server architecture:
 
@@ -20,7 +20,7 @@ FastAPI Backend
 PostgreSQL Database
 ```
 
-The frontend is responsible for the user interface and user interactions. The FastAPI backend exposes API endpoints, handles validation, authentication, and application logic, and communicates with the database through the database layer.
+The frontend is responsible for the user interface and user interactions. The FastAPI backend exposes API endpoints, handles validation, authentication, and application logic, and communicates with the database through SQLAlchemy.
 
 ## Features
 
@@ -35,8 +35,6 @@ The frontend is responsible for the user interface and user interactions. The Fa
 
 ### Planned / Future Features
 
-The Level 1 and Level 2 system design also accounts for features planned beyond the MVP:
-
 - Trip management
 - Likes, comments, and saved interactions
 - Travel alerts
@@ -45,7 +43,7 @@ The Level 1 and Level 2 system design also accounts for features planned beyond 
 - Administrative user and content management
 - Reports and analytics
 
-> Future functionality is represented separately in the project DFD so that it does not get confused with the current MVP scope.
+> Future functionality is represented separately in the project DFD so that it is not confused with the current MVP scope.
 
 ## System Architecture
 
@@ -118,7 +116,7 @@ React Frontend
 Updated UI
 ```
 
-Similarly, a request to view posts generally follows:
+Similarly, retrieving posts generally follows:
 
 ```text
 React Frontend
@@ -144,7 +142,7 @@ React Frontend
 
 The system is organized around the following functional areas:
 
-1. **User Management** – registration, authentication, and session/logout handling
+1. **User Management** – registration, authentication, and logout/session handling
 2. **Profile Management** – creating, viewing, and updating profiles
 3. **Post Management** – creating, viewing, and deleting travel posts
 4. **Follow Management** – following, unfollowing, and viewing follower/following relationships
@@ -157,11 +155,11 @@ The system is organized around the following functional areas:
 
 ## DFD Structure
 
-The project uses Data Flow Diagrams to describe how information moves through the system.
+The project uses Data Flow Diagrams (DFDs) to describe how information moves through the system.
 
-- **Level 0 (Context Diagram):** Represents TravelSphere as a single system and shows its interaction with external entities such as the Traveler/User, Administrator, and Map/Location Service.
+- **Level 0 – Context Diagram:** Represents Travel Sphere as a single system and shows its interaction with external entities such as the Traveler/User, Administrator, and Map/Location Service.
 - **Level 1 DFD:** Decomposes the system into major management processes and their associated data stores.
-- **Level 2 DFD:** Further decomposes individual Level 1 processes into smaller subprocesses.
+- **Level 2 DFD:** Further decomposes Level 1 processes into smaller subprocesses.
 
 The DFD distinguishes current MVP functionality from future/planned functionality.
 
@@ -169,11 +167,11 @@ The DFD distinguishes current MVP functionality from future/planned functionalit
 
 ### Traveler / User
 
-The primary user of TravelSphere. The traveler can register, log in, manage a profile, create and view posts, follow other travelers, view a personalized feed, and search for destinations.
+The primary user of Travel Sphere. The traveler can register, log in, manage a profile, create and view posts, follow other travelers, view a personalized feed, and search for destinations.
 
 ### Administrator
 
-Responsible for administrative activities such as user management, content moderation, report management, alerts, destination management, and viewing system reports/analytics.
+Responsible for administrative activities such as user management, content moderation, report management, alerts, destination management, and viewing system reports and analytics.
 
 ### Map / Location Service
 
@@ -184,7 +182,7 @@ An external service used for location-related functionality such as place search
 A typical project structure is:
 
 ```text
-TravelSphere/
+Travel-Sphere/
 ├── frontend/
 │   ├── src/
 │   │   ├── api/
@@ -206,22 +204,22 @@ TravelSphere/
 └── ...
 ```
 
-> The exact directory structure may change as development progresses. The README should be updated when major architectural changes are introduced.
+> The exact directory structure may change as development progresses. Update this section when major architectural changes are introduced.
 
 ## API Communication
 
 The frontend uses an API client to communicate with the FastAPI backend.
 
-Typical REST operations follow the HTTP methods:
+Typical REST operations follow these HTTP methods:
 
 | Method | Purpose |
 |---|---|
 | GET | Retrieve data |
-| POST | Create data / perform an action |
+| POST | Create data or perform an action |
 | PUT / PATCH | Update data |
 | DELETE | Delete data |
 
-For example, a post-related API may conceptually use:
+For example, post-related APIs may conceptually use:
 
 ```text
 POST   /api/posts
@@ -246,7 +244,7 @@ Install the following before running the project:
 
 ```bash
 git clone <repository-url>
-cd TravelSphere
+cd Travel-Sphere
 ```
 
 ### 2. Set up the backend
@@ -257,14 +255,16 @@ cd backend
 python -m venv venv
 ```
 
-Activate the virtual environment:
+Activate the virtual environment.
 
 **Windows:**
+
 ```bash
-venv\Scripts\activate
+venv\Scripts ctivate
 ```
 
 **macOS/Linux:**
+
 ```bash
 source venv/bin/activate
 ```
@@ -350,11 +350,11 @@ Frontend and backend work should be coordinated around the API contract so that 
 
 ## Project Status
 
-TravelSphere is being developed incrementally, with the MVP focusing on the core social-travel functionality. Additional trip, interaction, alert, notification, and administrative capabilities are planned as future extensions.
+Travel Sphere is being developed incrementally, with the MVP focusing on the core social-travel functionality. Additional trip, interaction, alert, notification, and administrative capabilities are planned as future extensions.
 
 ## Team
 
-TravelSphere is a collaborative academic software engineering project.
+Travel Sphere is a collaborative academic software engineering project.
 
 ## License
 
