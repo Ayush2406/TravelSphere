@@ -229,8 +229,6 @@ DELETE /api/posts/{id}
 
 The exact endpoint paths should match the implemented FastAPI routes.
 
-## Getting Started
-
 ## Development Workflow
 
 The project is developed collaboratively using Git and separate branches for feature development.
