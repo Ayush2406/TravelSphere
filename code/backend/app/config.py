@@ -2,12 +2,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     DATABASE_URL:str
-    APP_NAME = "TravelSphere"
+    APP_NAME:str = "TravelSphere"
     DEBUG:bool=False
     
-    config_model = SettingsConfigDict(
+    model_config = SettingsConfigDict(
         env_file =".env",
-        env_file_encodings="utf-8",
+        env_file_encoding="utf-8",
     )
     
 
