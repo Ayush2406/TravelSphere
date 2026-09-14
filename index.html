@@ -1,292 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TravelSphere — Connect, Share & Discover</title>
-  <!-- Google Fonts & FontAwesome for Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <title>TravelSphere | UCS503 Software Engineering Project</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
   <!-- Navigation Bar -->
-  <header class="navbar">
+  <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="logo">
         <i class="fa-solid fa-earth-americas"></i> TravelSphere
       </a>
-      <nav class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="#about">About</a>
         <a href="#features">Features</a>
-        <a href="#prototype">Live Prototype</a>
-        <a href="#destinations">Destinations</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#documentation">UML & Docs</a>
         <a href="#team" class="nav-btn">Our Team</a>
-      </nav>
-      <div class="menu-toggle" id="mobile-menu">
+      </div>
+      <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- 1. Hero Section -->
-  <section class="hero">
+  <!-- Hero Section -->
+  <header class="hero">
     <div class="hero-content">
-      <span class="badge"><i class="fa-solid fa-compass"></i> Welcome to the Social Travel Network</span>
-      <h1>Explore the World, <br><span>Together.</span></h1>
-      <p>Connect with passionate travelers, share your unforgettable journeys, and discover breathtaking destinations
-        curated by a global community.</p>
+      <div class="badge">
+        <i class="fa-solid fa-graduation-cap"></i> UCS503 Software Engineering Project
+      </div>
+      <h1>Collaborative Travel Discovery & <span>Social Platform</span></h1>
+      <p>TravelSphere is an advanced full-stack web application built to connect travelers, share destination insights, and streamline trip planning through modern architecture.</p>
       <div class="hero-buttons">
-        <a href="#prototype" class="btn btn-primary">Explore Travel <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="#destinations" class="btn btn-secondary">Discover Places</a>
+        <a href="https://github.com/Ayush2406/TravelSphere" target="_blank" class="btn btn-primary">
+          <i class="fa-brands fa-github"></i> View Repository
+        </a>
+        <a href="#documentation" class="btn btn-secondary">
+          <i class="fa-solid fa-folder-open"></i> Explore UML & Docs
+        </a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="floating-card card-1">
-        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&w=300&q=80"
-          alt="Traveler">
+        <div class="icon-box" style="margin:0; width:45px; height:45px; font-size:1.2rem;">
+          <i class="fa-solid fa-server"></i>
+        </div>
         <div>
-          <h4>Sarah Jenkins</h4>
-          <p><i class="fa-solid fa-location-dot"></i> Kyoto, Japan</p>
+          <h4>FastAPI Backend</h4>
+          <p>Robust REST APIs & PostgreSQL</p>
         </div>
       </div>
       <div class="floating-card card-2">
-        <i class="fa-solid fa-heart" style="color: #ff4757;"></i>
+        <i class="fa-solid fa-code" style="color: var(--accent);"></i>
         <div>
-          <h4>1.2k Likes</h4>
-          <p>On recent travel stories</p>
+          <h4>Modular Frontend</h4>
+          <p>Responsive UX Design</p>
         </div>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- 2. What TravelSphere Does Section -->
+  <!-- About Section -->
   <section id="about" class="about-section">
     <div class="container">
       <div class="section-title">
-        <h2>What TravelSphere Does</h2>
-        <p>Your all-in-one social platform designed specifically for travel enthusiasts</p>
+        <h2>About The Project</h2>
+        <p>Engineered with rigorous software development life cycle (SDLC) practices</p>
       </div>
       <div class="about-grid">
         <div class="about-card">
-          <div class="icon-box"><i class="fa-solid fa-share-nodes"></i></div>
-          <h3>Share Experiences</h3>
-          <p>Post your favorite moments, travel tips, and stunning photographs from every corner of the globe.</p>
+          <div class="icon-box">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <h3>System Architecture</h3>
+          <p>Clean separation of concerns with a decoupled backend framework and an interactive UI design.</p>
         </div>
         <div class="about-card">
-          <div class="icon-box"><i class="fa-solid fa-users"></i></div>
-          <h3>Connect & Follow</h3>
-          <p>Build your travel circle, follow fellow adventurers, and view personalized feeds based on your interests.
-          </p>
+          <div class="icon-box">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3>Secure & Scalable</h3>
+          <p>Features robust database migrations, secure endpoint access, and structured modular workflows.</p>
         </div>
         <div class="about-card">
-          <div class="icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
-          <h3>Maintain History</h3>
-          <p>Keep a visual log of all the countries and destinations you've explored to inspire your next trip.</p>
+          <div class="icon-box">
+            <i class="fa-solid fa-users-viewfinder"></i>
+          </div>
+          <h3>Collaborative Social Core</h3>
+          <p>Enables users to publish travel experiences, follow itineraries, and explore community recommendations seamlessly.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. Core Features Section -->
-  <section id="features" class="features-section">
+  <!-- Documentation & UML Section -->
+  <section id="documentation" class="prototype-section">
     <div class="container">
       <div class="section-title">
-        <h2>Core Features</h2>
-        <p>Engineered for seamless exploration and social connectivity</p>
+        <h2>Project Documentation & UML</h2>
+        <p>Comprehensive design models and architectural blueprints created for UCS503</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-item">
-          <i class="fa-solid fa-id-card"></i>
-          <div>
-            <h4>User Profiles</h4>
-            <p>Personalized traveler profiles featuring bios, follower counts, and interactive travel history badges.
-            </p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-camera-retro"></i>
-          <div>
-            <h4>Travel Posts</h4>
-            <p>Rich media posts capturing text reflections, precise locations, and high-resolution photography.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-user-plus"></i>
-          <div>
-            <h4>Following Travelers</h4>
-            <p>Interactive follow and unfollow states to curate your personal community network instantly.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-rss"></i>
-          <div>
-            <h4>Personalized Feed</h4>
-            <p>A dynamic timeline stream displaying updates exclusively from the travelers you follow.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-magnifying-glass-location"></i>
-          <div>
-            <h4>Destination Discovery</h4>
-            <p>Instant search and filtering functionality to find popular hotspots and hidden gems.</p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-suitcase-rolling"></i>
-          <div>
-            <h4>Travel History Log</h4>
-            <p>A structured visual portfolio showcasing your visited cities, countries, and bucket lists.</p>
-          </div>
-        </div>
+      <div style="text-align: center; max-width: 700px; margin: 0 auto; background: var(--bg-light); padding: 40px; border-radius: 20px; border: 1px solid var(--border-color);">
+        <i class="fa-solid fa-file-lines" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+        <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Explore System Models & DFDs</h3>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">Access architectural layouts, Data Flow Diagrams (DFDs), and comprehensive project design documentation inside the repository.</p>
+        <a href="https://github.com/Ayush2406/TravelSphere/tree/master/docs" target="_blank" class="btn btn-primary">
+          <i class="fa-solid fa-diagram-project"></i> Open Docs Folder on GitHub
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 4. Prototype UI Preview Section -->
-  <section id="prototype" class="prototype-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Prototype UI Preview</h2>
-        <p>Interact with the live functional layout below</p>
-      </div>
-
-      <div class="prototype-container">
-        <!-- Left Column: Feed & Posts -->
-        <div class="prototype-feed-col">
-          <div class="feed-header">
-            <h3><i class="fa-solid fa-compass"></i> Your Travel Feed</h3>
-            <span class="live-indicator">Mock Live</span>
-          </div>
-
-          <div id="feed-container">
-            <!-- Dynamic Posts will be injected here via script.js -->
-          </div>
-        </div>
-
-        <!-- Right Column: Profile Widget & History -->
-        <div class="prototype-profile-col">
-          <div class="profile-card">
-            <div class="profile-banner"></div>
-            <div class="profile-avatar-container">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-                alt="Alex Rivera" class="profile-avatar">
-            </div>
-            <div class="profile-info">
-              <h3>Alex Rivera</h3>
-              <p class="profile-handle">@alex_wanders</p>
-              <p class="profile-bio">Globe-trotter & photography enthusiast. Capturing stories one city at a time. 🌍✈️
-              </p>
-
-              <div class="profile-stats">
-                <div>
-                  <span class="stat-num">48</span>
-                  <span class="stat-label">Posts</span>
-                </div>
-                <div>
-                  <span class="stat-num" id="follower-count">1,420</span>
-                  <span class="stat-label">Followers</span>
-                </div>
-                <div>
-                  <span class="stat-num">312</span>
-                  <span class="stat-label">Following</span>
-                </div>
-              </div>
-
-              <button id="follow-btn" class="btn btn-primary btn-full"><i class="fa-solid fa-user-plus"></i> Follow
-                Traveler</button>
-            </div>
-          </div>
-
-          <!-- Travel History Widget -->
-          <div class="history-card">
-            <h4><i class="fa-solid fa-earth-americas"></i> Travel History (Visited)</h4>
-            <div class="history-tags">
-              <span class="history-tag"><i class="fa-solid fa-plane"></i> Tokyo, Japan</span>
-              <span class="history-tag"><i class="fa-solid fa-plane"></i> Paris, France</span>
-              <span class="history-tag"><i class="fa-solid fa-plane"></i> Reykjavik, Iceland</span>
-              <span class="history-tag"><i class="fa-solid fa-plane"></i> Bali, Indonesia</span>
-              <span class="history-tag"><i class="fa-solid fa-plane"></i> Swiss Alps</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. How It Works Section -->
-  <section id="how-it-works" class="how-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>How It Works</h2>
-        <p>Get started with TravelSphere in four simple steps</p>
-      </div>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num">01</div>
-          <h3>Create Profile</h3>
-          <p>Set up your traveler profile, write your bio, and display your past adventures.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">02</div>
-          <h3>Share Travel</h3>
-          <p>Upload photos, tag your geographic location, and write about your journey.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">03</div>
-          <h3>Follow Travelers</h3>
-          <p>Connect with other global explorers to discover unique perspectives and tips.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-num">04</div>
-          <h3>Discover Destinations</h3>
-          <p>Search upcoming hotspots and explore curated travel stories from around the world.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Destination Discovery Section -->
-  <section id="destinations" class="destination-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Destination Discovery</h2>
-        <p>Search and explore stunning places awaiting your next expedition</p>
-      </div>
-
-      <!-- Search Filter Bar -->
-      <div class="search-filter-bar">
-        <div class="search-input-wrapper">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="destination-search"
-            placeholder="Search destinations (e.g., Japan, Iceland, France)...">
-        </div>
-        <div class="filter-chips">
-          <button class="filter-chip active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="Asia">Asia</button>
-          <button class="filter-chip" data-filter="Europe">Europe</button>
-          <button class="filter-chip" data-filter="Island">Islands</button>
-        </div>
-      </div>
-
-      <!-- Destination Cards Grid -->
-      <div class="destinations-grid" id="destinations-grid">
-        <!-- Destination cards populated dynamically or filtered -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Team Section -->
+  <!-- Team Section -->
   <section id="team" class="team-section">
     <div class="container">
       <div class="section-title">
         <h2>Project Team</h2>
-        <p>The minds behind TravelSphere</p>
+        <p>The minds behind TravelSphere (UCS503 Group)</p>
       </div>
       <div class="team-grid">
         <div class="team-card">
@@ -321,11 +159,9 @@
   <footer>
     <div class="container footer-content">
       <a href="#" class="logo footer-logo"><i class="fa-solid fa-earth-americas"></i> TravelSphere</a>
-      <p>&copy; 2026 TravelSphere Prototype. Built for academic demonstration purposes.</p>
+      <p>&copy; 2026 TravelSphere. UCS503 Software Engineering Academic Project.</p>
       <div class="social-links">
-        <a href="#"><i class="fa-brands fa-github"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://github.com/Ayush2406/TravelSphere" target="_blank"><i class="fa-brands fa-github"></i></a>
       </div>
     </div>
   </footer>
@@ -333,5 +169,4 @@
   <!-- JavaScript Link -->
   <script src="script.js"></script>
 </body>
-
 </html>
