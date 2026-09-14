@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">🌍 TravelSphere</h1>
+        <h1 className="auth-title">TravelSphere</h1>
         <h2 className="auth-subtitle">Sign in</h2>
 
         {error && <p className="auth-error" role="alert">{error}</p>}
