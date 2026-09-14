@@ -1,423 +1,337 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelSphere — Travel Together</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelSphere — Connect, Share & Discover</title>
+  <!-- Google Fonts & FontAwesome for Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <span class="logo-icon">✈</span>
-                TravelSphere
-            </a>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fa-solid fa-earth-americas"></i> TravelSphere
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#prototype">Live Prototype</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#team" class="nav-btn">Our Team</a>
+      </nav>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+  </header>
 
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#preview">Preview</a>
-                <a href="#team">Team</a>
-            </div>
-
-            <a href="#preview" class="nav-button">Explore</a>
+  <!-- 1. Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge"><i class="fa-solid fa-compass"></i> Welcome to the Social Travel Network</span>
+      <h1>Explore the World, <br><span>Together.</span></h1>
+      <p>Connect with passionate travelers, share your unforgettable journeys, and discover breathtaking destinations
+        curated by a global community.</p>
+      <div class="hero-buttons">
+        <a href="#prototype" class="btn btn-primary">Explore Travel <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#destinations" class="btn btn-secondary">Discover Places</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&w=300&q=80"
+          alt="Traveler">
+        <div>
+          <h4>Sarah Jenkins</h4>
+          <p><i class="fa-solid fa-location-dot"></i> Kyoto, Japan</p>
         </div>
-    </nav>
+      </div>
+      <div class="floating-card card-2">
+        <i class="fa-solid fa-heart" style="color: #ff4757;"></i>
+        <div>
+          <h4>1.2k Likes</h4>
+          <p>On recent travel stories</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Hero -->
-    <header id="home" class="hero">
-        <div class="hero-content">
-            <span class="eyebrow">PLAN • PROTECT • SAVE • DISCOVER</span>
+  <!-- 2. What TravelSphere Does Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>What TravelSphere Does</h2>
+        <p>Your all-in-one social platform designed specifically for travel enthusiasts</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="icon-box"><i class="fa-solid fa-share-nodes"></i></div>
+          <h3>Share Experiences</h3>
+          <p>Post your favorite moments, travel tips, and stunning photographs from every corner of the globe.</p>
+        </div>
+        <div class="about-card">
+          <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+          <h3>Connect & Follow</h3>
+          <p>Build your travel circle, follow fellow adventurers, and view personalized feeds based on your interests.
+          </p>
+        </div>
+        <div class="about-card">
+          <div class="icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
+          <h3>Maintain History</h3>
+          <p>Keep a visual log of all the countries and destinations you've explored to inspire your next trip.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <h1>
-                Travel stories are better
-                <span>together.</span>
-            </h1>
-
-            <p>
-                TravelSphere is a social travel platform where travelers can
-                share experiences, follow people they trust, discover destinations,
-                and build a personal record of their journeys.
+  <!-- 3. Core Features Section -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Core Features</h2>
+        <p>Engineered for seamless exploration and social connectivity</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <i class="fa-solid fa-id-card"></i>
+          <div>
+            <h4>User Profiles</h4>
+            <p>Personalized traveler profiles featuring bios, follower counts, and interactive travel history badges.
             </p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-camera-retro"></i>
+          <div>
+            <h4>Travel Posts</h4>
+            <p>Rich media posts capturing text reflections, precise locations, and high-resolution photography.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-user-plus"></i>
+          <div>
+            <h4>Following Travelers</h4>
+            <p>Interactive follow and unfollow states to curate your personal community network instantly.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-rss"></i>
+          <div>
+            <h4>Personalized Feed</h4>
+            <p>A dynamic timeline stream displaying updates exclusively from the travelers you follow.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-magnifying-glass-location"></i>
+          <div>
+            <h4>Destination Discovery</h4>
+            <p>Instant search and filtering functionality to find popular hotspots and hidden gems.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-suitcase-rolling"></i>
+          <div>
+            <h4>Travel History Log</h4>
+            <p>A structured visual portfolio showcasing your visited cities, countries, and bucket lists.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <div class="hero-buttons">
-                <a href="#preview" class="primary-button">Explore TravelSphere →</a>
-                <a href="#features" class="secondary-button">See Features</a>
+  <!-- 4. Prototype UI Preview Section -->
+  <section id="prototype" class="prototype-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Prototype UI Preview</h2>
+        <p>Interact with the live functional layout below</p>
+      </div>
+
+      <div class="prototype-container">
+        <!-- Left Column: Feed & Posts -->
+        <div class="prototype-feed-col">
+          <div class="feed-header">
+            <h3><i class="fa-solid fa-compass"></i> Your Travel Feed</h3>
+            <span class="live-indicator">Mock Live</span>
+          </div>
+
+          <div id="feed-container">
+            <!-- Dynamic Posts will be injected here via script.js -->
+          </div>
+        </div>
+
+        <!-- Right Column: Profile Widget & History -->
+        <div class="prototype-profile-col">
+          <div class="profile-card">
+            <div class="profile-banner"></div>
+            <div class="profile-avatar-container">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+                alt="Alex Rivera" class="profile-avatar">
             </div>
-        </div>
+            <div class="profile-info">
+              <h3>Alex Rivera</h3>
+              <p class="profile-handle">@alex_wanders</p>
+              <p class="profile-bio">Globe-trotter & photography enthusiast. Capturing stories one city at a time. 🌍✈️
+              </p>
 
-        <div class="hero-card">
-            <div class="hero-image">
-                <div class="image-overlay">
-                    <span>📍 Bali, Indonesia</span>
-                    <strong>Discover your next journey.</strong>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- What it does -->
-    <section class="intro-section">
-        <div class="section-heading">
-            <span class="eyebrow">THE PLATFORM</span>
-            <h2>One place for your travel world.</h2>
-            <p>
-                TravelSphere connects your travel identity, experiences,
-                people and destinations in one simple platform.
-            </p>
-        </div>
-
-        <div class="stats">
-            <div>
-                <strong>01</strong>
-                <span>Create</span>
-            </div>
-            <div>
-                <strong>02</strong>
-                <span>Connect</span>
-            </div>
-            <div>
-                <strong>03</strong>
-                <span>Discover</span>
-            </div>
-            <div>
-                <strong>04</strong>
-                <span>Remember</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="features-section">
-        <div class="section-heading center">
-            <span class="eyebrow">CORE FEATURES</span>
-            <h2>Built around the way travelers actually share.</h2>
-        </div>
-
-        <div class="feature-grid">
-
-            <article class="feature-card">
-                <div class="feature-icon">👤</div>
-                <h3>Traveler Profiles</h3>
-                <p>
-                    Create a personal travel profile with your bio,
-                    posts and destinations you've visited.
-                </p>
-            </article>
-
-            <article class="feature-card">
-                <div class="feature-icon">📸</div>
-                <h3>Travel Posts</h3>
-                <p>
-                    Share travel experiences with text, photos and
-                    the destination connected to your post.
-                </p>
-            </article>
-
-            <article class="feature-card">
-                <div class="feature-icon">🤝</div>
-                <h3>Follow Travelers</h3>
-                <p>
-                    Find other travelers and follow their journeys
-                    to keep up with their latest experiences.
-                </p>
-            </article>
-
-            <article class="feature-card">
-                <div class="feature-icon">📰</div>
-                <h3>Personalized Feed</h3>
-                <p>
-                    See recent posts from the travelers you follow,
-                    giving you a feed tailored to your interests.
-                </p>
-            </article>
-
-            <article class="feature-card">
-                <div class="feature-icon">🌎</div>
-                <h3>Destination Discovery</h3>
-                <p>
-                    Search destinations and explore posts and
-                    travelers associated with each place.
-                </p>
-            </article>
-
-            <article class="feature-card">
-                <div class="feature-icon">🗺️</div>
-                <h3>Travel History</h3>
-                <p>
-                    Your profile builds a history of destinations
-                    you've shared through your travel posts.
-                </p>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- Preview -->
-    <section id="preview" class="preview-section">
-        <div class="section-heading center">
-            <span class="eyebrow">PRODUCT PREVIEW</span>
-            <h2>A glimpse of TravelSphere.</h2>
-            <p>Mock screens showing how the platform could look in use.</p>
-        </div>
-
-        <div class="mock-app">
-
-            <!-- Sidebar -->
-            <aside class="app-sidebar">
-                <div class="mini-logo">✈ <span>TravelSphere</span></div>
-
-                <button class="side-link active" data-view="feed">🏠 Feed</button>
-                <button class="side-link" data-view="discover">🌎 Discover</button>
-                <button class="side-link" data-view="profile">👤 Profile</button>
-
-                <div class="sidebar-bottom">
-                    <div class="mini-avatar">AG</div>
-                    <div>
-                        <strong>Ayush</strong>
-                        <small>Traveler</small>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Feed -->
-            <main class="app-content">
-
-                <div class="app-header">
-                    <div>
-                        <span class="small-label">YOUR FEED</span>
-                        <h3 id="view-title">Latest from travelers</h3>
-                    </div>
-
-                    <button class="notification">🔔</button>
-                </div>
-
-                <!-- Feed view -->
-                <div id="feed-view" class="app-view">
-
-                    <article class="post">
-                        <div class="post-top">
-                            <div class="avatar">AC</div>
-                            <div>
-                                <strong>Amy Chen</strong>
-                                <span>@traveler_amy · 2h ago</span>
-                            </div>
-                            <button class="more">•••</button>
-                        </div>
-
-                        <p>
-                            Sunrise at Angkor Wat was unreal. Definitely worth
-                            waking up at 4:30 AM for this view!
-                        </p>
-
-                        <div class="post-photo cambodia">
-                            <span>📍 Siem Reap, Cambodia</span>
-                        </div>
-
-                        <div class="post-actions">
-                            <button class="like-button">♡ 42</button>
-                            <button>💬 8</button>
-                            <button>↗ Share</button>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-top">
-                            <div class="avatar purple">NS</div>
-                            <div>
-                                <strong>Neha Sharma</strong>
-                                <span>@neha_travels · 5h ago</span>
-                            </div>
-                            <button class="more">•••</button>
-                        </div>
-
-                        <p>
-                            Finally explored the old streets of Kyoto.
-                            Every corner feels like a different story.
-                        </p>
-
-                        <div class="post-photo japan">
-                            <span>📍 Kyoto, Japan</span>
-                        </div>
-
-                        <div class="post-actions">
-                            <button class="like-button">♡ 67</button>
-                            <button>💬 12</button>
-                            <button>↗ Share</button>
-                        </div>
-                    </article>
-
-                </div>
-
-                <!-- Discover view -->
-                <div id="discover-view" class="app-view hidden">
-                    <div class="search-box">
-                        🔎 <input id="destination-search" type="text" placeholder="Search destinations...">
-                    </div>
-
-                    <div class="destination-grid">
-                        <div class="destination-card">
-                            <div class="destination-image bali"></div>
-                            <h4>Bali</h4>
-                            <span>Indonesia · 124 travelers</span>
-                        </div>
-
-                        <div class="destination-card">
-                            <div class="destination-image paris"></div>
-                            <h4>Paris</h4>
-                            <span>France · 89 travelers</span>
-                        </div>
-
-                        <div class="destination-card">
-                            <div class="destination-image tokyo"></div>
-                            <h4>Tokyo</h4>
-                            <span>Japan · 156 travelers</span>
-                        </div>
-
-                        <div class="destination-card">
-                            <div class="destination-image nepal"></div>
-                            <h4>Pokhara</h4>
-                            <span>Nepal · 73 travelers</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Profile view -->
-                <div id="profile-view" class="app-view hidden">
-
-                    <div class="profile-header">
-                        <div class="profile-avatar">AG</div>
-                        <div>
-                            <h3>Ayush Gupta</h3>
-                            <p>@ayush_travels</p>
-                            <span>Exploring one destination at a time 🌎</span>
-                        </div>
-                        <button class="follow-button">Edit Profile</button>
-                    </div>
-
-                    <div class="profile-stats">
-                        <div><strong>18</strong><span>Posts</span></div>
-                        <div><strong>42</strong><span>Following</span></div>
-                        <div><strong>31</strong><span>Followers</span></div>
-                    </div>
-
-                    <h4 class="history-title">Places visited</h4>
-
-                    <div class="history-list">
-                        <span>🇮🇳 Delhi</span>
-                        <span>🇳🇵 Pokhara</span>
-                        <span>🇯🇵 Kyoto</span>
-                        <span>🇮🇩 Bali</span>
-                    </div>
-
-                </div>
-
-            </main>
-        </div>
-    </section>
-
-    <!-- How it works -->
-    <section id="how-it-works" class="how-section">
-        <div class="section-heading center">
-            <span class="eyebrow">HOW IT WORKS</span>
-            <h2>Your journey, connected.</h2>
-        </div>
-
-        <div class="steps">
-
-            <div class="step">
-                <span>01</span>
+              <div class="profile-stats">
                 <div>
-                    <h3>Create your profile</h3>
-                    <p>
-                        Set up your traveler identity and start building
-                        your travel history.
-                    </p>
+                  <span class="stat-num">48</span>
+                  <span class="stat-label">Posts</span>
                 </div>
-            </div>
-
-            <div class="step">
-                <span>02</span>
                 <div>
-                    <h3>Share your experiences</h3>
-                    <p>
-                        Create travel posts with stories, photos and
-                        destinations.
-                    </p>
+                  <span class="stat-num" id="follower-count">1,420</span>
+                  <span class="stat-label">Followers</span>
                 </div>
-            </div>
-
-            <div class="step">
-                <span>03</span>
                 <div>
-                    <h3>Follow travelers</h3>
-                    <p>
-                        Connect with people whose journeys interest you
-                        and follow their updates.
-                    </p>
+                  <span class="stat-num">312</span>
+                  <span class="stat-label">Following</span>
                 </div>
-            </div>
+              </div>
 
-            <div class="step">
-                <span>04</span>
-                <div>
-                    <h3>Discover & remember</h3>
-                    <p>
-                        Explore destinations and build a personal record
-                        of the places you've experienced.
-                    </p>
-                </div>
+              <button id="follow-btn" class="btn btn-primary btn-full"><i class="fa-solid fa-user-plus"></i> Follow
+                Traveler</button>
             </div>
+          </div>
 
+          <!-- Travel History Widget -->
+          <div class="history-card">
+            <h4><i class="fa-solid fa-earth-americas"></i> Travel History (Visited)</h4>
+            <div class="history-tags">
+              <span class="history-tag"><i class="fa-solid fa-plane"></i> Tokyo, Japan</span>
+              <span class="history-tag"><i class="fa-solid fa-plane"></i> Paris, France</span>
+              <span class="history-tag"><i class="fa-solid fa-plane"></i> Reykjavik, Iceland</span>
+              <span class="history-tag"><i class="fa-solid fa-plane"></i> Bali, Indonesia</span>
+              <span class="history-tag"><i class="fa-solid fa-plane"></i> Swiss Alps</span>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Team -->
-    <section id="team" class="team-section">
-        <div class="section-heading center">
-            <span class="eyebrow">THE TEAM</span>
-            <h2>Built by travelers & builders.</h2>
+  <!-- 5. How It Works Section -->
+  <section id="how-it-works" class="how-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>How It Works</h2>
+        <p>Get started with TravelSphere in four simple steps</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3>Create Profile</h3>
+          <p>Set up your traveler profile, write your bio, and display your past adventures.</p>
         </div>
-
-        <div class="team-grid">
-
-            <div class="team-card">
-                <div class="team-avatar">AG</div>
-                <h3>Ayush Gupta</h3>
-                <p>1024030781</p>
-            </div>
-
-            <div class="team-card">
-                <div class="team-avatar purple">NC</div>
-                <h3>Niharika Chawla</h3>
-                <p>1024030762</p>
-            </div>
-
-            <div class="team-card">
-                <div class="team-avatar orange">SS</div>
-                <h3>Sarwar Singh Dhillon</h3>
-                <p>1024030862</p>
-            </div>
-
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3>Share Travel</h3>
+          <p>Upload photos, tag your geographic location, and write about your journey.</p>
         </div>
-    </section>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3>Follow Travelers</h3>
+          <p>Connect with other global explorers to discover unique perspectives and tips.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h3>Discover Destinations</h3>
+          <p>Search upcoming hotspots and explore curated travel stories from around the world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-logo">✈ TravelSphere</div>
-        <p>Connecting travelers through stories, people and places.</p>
-        <span>University Project · 2026</span>
-    </footer>
+  <!-- 6. Destination Discovery Section -->
+  <section id="destinations" class="destination-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Destination Discovery</h2>
+        <p>Search and explore stunning places awaiting your next expedition</p>
+      </div>
 
-    <script src="script.js"></script>
+      <!-- Search Filter Bar -->
+      <div class="search-filter-bar">
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="destination-search"
+            placeholder="Search destinations (e.g., Japan, Iceland, France)...">
+        </div>
+        <div class="filter-chips">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="Asia">Asia</button>
+          <button class="filter-chip" data-filter="Europe">Europe</button>
+          <button class="filter-chip" data-filter="Island">Islands</button>
+        </div>
+      </div>
+
+      <!-- Destination Cards Grid -->
+      <div class="destinations-grid" id="destinations-grid">
+        <!-- Destination cards populated dynamically or filtered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Team Section -->
+  <section id="team" class="team-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Project Team</h2>
+        <p>The minds behind TravelSphere</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fa-solid fa-user-astronaut"></i>
+          </div>
+          <h3>Ayush Gupta</h3>
+          <span class="roll-number">Roll No: 1024030781</span>
+          <p>Frontend Architecture & UX Design</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fa-solid fa-user-ninja"></i>
+          </div>
+          <h3>Niharika Chawla</h3>
+          <span class="roll-number">Roll No: 1024030762</span>
+          <p>Social Features & Mock Feed Logic</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <h3>Sarwar Singh Dhillon</h3>
+          <span class="roll-number">Roll No: 1024030862</span>
+          <p>Destination Discovery & Component Styling</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <a href="#" class="logo footer-logo"><i class="fa-solid fa-earth-americas"></i> TravelSphere</a>
+      <p>&copy; 2026 TravelSphere Prototype. Built for academic demonstration purposes.</p>
+      <div class="social-links">
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Link -->
+  <script src="script.js"></script>
 </body>
 
 </html>
-```
