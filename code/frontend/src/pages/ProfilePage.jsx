@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getUser, updateMe, getFollowers, getFollowing } from '../api/users';
@@ -6,41 +6,42 @@ import { followUser, unfollowUser } from '../api/follows';
 import { uploadImage } from '../api/uploads';
 import { getPosts, deletePost } from '../api/posts';
 import { mediaUrl } from '../utils/mediaUrl';
+import { formatError } from '../utils/formatError';
 import Navbar from '../components/Navbar';
 import PostCard from '../components/PostCard';
 
 /**
- * ProfilePage - View any user's public profile.
- * Own profile: shows Edit form and own posts.
- * Other profile: shows Follow/Unfollow and their posts.
+ * ProfilePage - Traveler profile on Travel Sphere.
+ * Shows stats, bio, destinations visited count, followers/following, and stories.
  */
 export default function ProfilePage() {
   const { userId } = useParams();
   const { user: me } = useAuth();
 
-  const [profile, setProfile]     = useState(null);
+  const [profile, setProfile] = useState(null);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [profileError, setProfileError]     = useState('');
+  const [profileError, setProfileError] = useState('');
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [socialTab, setSocialTab] = useState(null); // 'followers' | 'following' | null
 
-  const [posts, setPosts]         = useState([]);
+  const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
 
   const [isFollowing, setIsFollowing] = useState(false);
-  const [followBusy, setFollowBusy]   = useState(false);
+  const [followBusy, setFollowBusy] = useState(false);
 
   // Edit profile state
-  const [editing, setEditing]     = useState(false);
-  const [editForm, setEditForm]   = useState({ full_name: '', bio: '', profile_picture_url: '' });
-  const [editFile, setEditFile]   = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [editForm, setEditForm] = useState({ full_name: '', bio: '', profile_picture_url: '' });
+  const [editFile, setEditFile] = useState(null);
+  const [editPreview, setEditPreview] = useState(null);
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState('');
   const [editSuccess, setEditSuccess] = useState('');
 
-  const isOwnProfile = me && parseInt(userId, 10) === me.id;
+  const isOwnProfile = Boolean(me && parseInt(userId, 10) === me.id);
 
   const loadProfile = useCallback(async () => {
     setProfileLoading(true);
@@ -53,39 +54,44 @@ export default function ProfilePage() {
         bio: res.data.bio || '',
         profile_picture_url: res.data.profile_picture_url || '',
       });
-    } catch {
-      setProfileError('User not found.');
+    } catch (err) {
+      setProfileError(formatError(err, 'Traveler profile not found.'));
     } finally {
       setProfileLoading(false);
     }
   }, [userId]);
 
-  // Load followers to determine follow state
   const loadFollowers = useCallback(async () => {
     try {
       const res = await getFollowers(userId);
       const list = res.data ?? [];
       setFollowers(list);
       if (me) setIsFollowing(list.some((f) => f.id === me.id));
-    } catch { /* non-fatal */ }
+    } catch {
+      // Non-fatal
+    }
   }, [userId, me]);
 
   const loadFollowing = useCallback(async () => {
     try {
       const res = await getFollowing(userId);
       setFollowing(res.data ?? []);
-    } catch { /* non-fatal */ }
+    } catch {
+      // Non-fatal
+    }
   }, [userId]);
 
-  // Load this user's posts from the public /posts endpoint filtered client-side
   const loadPosts = useCallback(async () => {
     setPostsLoading(true);
     try {
       const res = await getPosts();
       const all = res.data ?? [];
       setPosts(all.filter((p) => p.user && p.user.id === parseInt(userId, 10)));
-    } catch { /* non-fatal */ }
-    finally { setPostsLoading(false); }
+    } catch {
+      // Non-fatal
+    } finally {
+      setPostsLoading(false);
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -100,8 +106,9 @@ export default function ProfilePage() {
     try {
       await followUser(parseInt(userId, 10));
       setIsFollowing(true);
+      loadFollowers();
     } catch (err) {
-      alert(err?.response?.data?.detail || 'Could not follow.');
+      alert(formatError(err, 'Could not follow user.'));
     } finally {
       setFollowBusy(false);
     }
@@ -112,10 +119,21 @@ export default function ProfilePage() {
     try {
       await unfollowUser(parseInt(userId, 10));
       setIsFollowing(false);
+      loadFollowers();
     } catch (err) {
-      alert(err?.response?.data?.detail || 'Could not unfollow.');
+      alert(formatError(err, 'Could not unfollow user.'));
     } finally {
       setFollowBusy(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0] || null;
+    setEditFile(file);
+    if (file) {
+      setEditPreview(URL.createObjectURL(file));
+    } else {
+      setEditPreview(null);
     }
   };
 
@@ -127,33 +145,35 @@ export default function ProfilePage() {
 
     let pictureUrl = editForm.profile_picture_url;
 
-    // Upload new profile picture if a file was selected
     if (editFile) {
       try {
         const upRes = await uploadImage(editFile);
         pictureUrl = upRes.data.url;
-      } catch {
-        setEditError('Image upload failed.');
+      } catch (err) {
+        setEditError(formatError(err, 'Failed to upload new profile photo.'));
         setEditSaving(false);
         return;
       }
     }
 
     try {
-      // Send full_name and bio unconditionally so the user can clear them.
-      // Only include profile_picture_url when there is one to set.
+      // Preserves ability to clear full_name and bio with empty string
       const payload = {
         full_name: editForm.full_name,
         bio: editForm.bio,
       };
-      if (pictureUrl) payload.profile_picture_url = pictureUrl;
+      if (pictureUrl) {
+        payload.profile_picture_url = pictureUrl;
+      }
 
       await updateMe(payload);
-      setEditSuccess('Profile updated!');
+      setEditSuccess('Profile updated successfully!');
       setEditing(false);
+      setEditPreview(null);
+      setEditFile(null);
       loadProfile();
     } catch (err) {
-      setEditError(err?.response?.data?.detail || 'Update failed.');
+      setEditError(formatError(err, 'Failed to update profile.'));
     } finally {
       setEditSaving(false);
     }
@@ -163,161 +183,331 @@ export default function ProfilePage() {
     try {
       await deletePost(postId);
       setPosts((prev) => prev.filter((p) => p.id !== postId));
-    } catch {
-      alert('Failed to delete post.');
+    } catch (err) {
+      alert(formatError(err, 'Failed to delete post.'));
     }
   };
+
+  const userInitial = (profile?.full_name || profile?.username || '?')[0].toUpperCase();
 
   return (
     <div className="app-shell">
       <Navbar />
-      <div className="page-container">
 
-        {profileLoading && <p className="state-msg">Loading profile…</p>}
-        {profileError   && <p className="state-error">{profileError}</p>}
-
-        {profile && (
-          <>
-            {/* Profile header card */}
-            <div className="profile-card">
-              <div className="profile-pic-wrap">
-                {profile.profile_picture_url ? (
-                  <img
-                    src={mediaUrl(profile.profile_picture_url)}
-                    alt="Profile"
-                    className="profile-pic"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                ) : (
-                  <div className="profile-pic-placeholder">
-                    {(profile.username || '?')[0].toUpperCase()}
-                  </div>
-                )}
-              </div>
-
-              <div className="profile-info">
-                <h2 className="profile-name">{profile.full_name || profile.username}</h2>
-                <p className="profile-handle">@{profile.username}</p>
-                {profile.bio && <p className="profile-bio">{profile.bio}</p>}
-
-                <div className="profile-stats">
-                  <span><strong>{profile.post_count ?? 0}</strong> posts</span>
-                  <span><strong>{profile.destinations_visited?.length ?? 0}</strong> destinations</span>
-                  <button
-                    className="stat-link"
-                    onClick={() => setSocialTab(socialTab === 'followers' ? null : 'followers')}
-                  >
-                    <strong>{followers.length}</strong> followers
-                  </button>
-                  <button
-                    className="stat-link"
-                    onClick={() => setSocialTab(socialTab === 'following' ? null : 'following')}
-                  >
-                    <strong>{following.length}</strong> following
-                  </button>
-                </div>
-
-                <div className="profile-actions">
-                  {isOwnProfile ? (
-                    <button
-                      className="btn-primary-sm"
-                      onClick={() => { setEditing(!editing); setEditError(''); setEditSuccess(''); }}
-                    >
-                      {editing ? 'Cancel Edit' : 'Edit Profile'}
-                    </button>
-                  ) : (
-                    me && (
-                      isFollowing
-                        ? <button onClick={handleUnfollow} disabled={followBusy} className="btn-secondary-sm">
-                            {followBusy ? '…' : 'Unfollow'}
-                          </button>
-                        : <button onClick={handleFollow} disabled={followBusy} className="btn-primary-sm">
-                            {followBusy ? '…' : 'Follow'}
-                          </button>
-                    )
-                  )}
-                </div>
+      <main className="page-container">
+        {/* Loading */}
+        {profileLoading && (
+          <div className="skeleton-card">
+            <div className="skeleton-header">
+              <div className="skeleton-circle lg"></div>
+              <div className="skeleton-lines">
+                <div className="skeleton-line w-40"></div>
+                <div className="skeleton-line w-20"></div>
+                <div className="skeleton-line w-60"></div>
               </div>
             </div>
+          </div>
+        )}
 
-            {/* Edit profile form */}
+        {/* Error */}
+        {profileError && (
+          <div className="state-card error-card">
+            <h3>Profile not found</h3>
+            <p>{profileError}</p>
+            <Link to="/explore" className="btn-secondary-sm">
+              Discover Explorers
+            </Link>
+          </div>
+        )}
+
+        {/* Profile Content */}
+        {profile && !profileLoading && (
+          <>
+            {/* Profile Header Card */}
+            <section className="profile-hero-card">
+              <div className="profile-hero-top">
+                <div className="profile-avatar-wrapper">
+                  {profile.profile_picture_url ? (
+                    <img
+                      src={mediaUrl(profile.profile_picture_url)}
+                      alt={profile.username}
+                      className="profile-avatar-img"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  ) : (
+                    <div className="profile-avatar-fallback">{userInitial}</div>
+                  )}
+                </div>
+
+                <div className="profile-info-main">
+                  <div className="profile-name-row">
+                    <h1 className="profile-display-name">
+                      {profile.full_name || profile.username}
+                    </h1>
+                    <span className="profile-handle-badge">@{profile.username}</span>
+                  </div>
+
+                  {profile.bio ? (
+                    <p className="profile-bio-text">{profile.bio}</p>
+                  ) : (
+                    <p className="profile-bio-empty">No bio provided yet.</p>
+                  )}
+
+                  {/* Profile Action: Edit or Follow/Unfollow */}
+                  <div className="profile-cta-row">
+                    {isOwnProfile ? (
+                      <button
+                        className="btn-secondary-sm"
+                        onClick={() => {
+                          setEditing(!editing);
+                          setEditError('');
+                          setEditSuccess('');
+                        }}
+                      >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>{editing ? 'Cancel Editing' : 'Edit Profile'}</span>
+                      </button>
+                    ) : (
+                      me && (
+                        isFollowing ? (
+                          <button
+                            onClick={handleUnfollow}
+                            disabled={followBusy}
+                            className="btn-secondary-sm"
+                          >
+                            <span>{followBusy ? 'Updating…' : 'Unfollow'}</span>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={handleFollow}
+                            disabled={followBusy}
+                            className="btn-primary-sm"
+                          >
+                            <span>{followBusy ? 'Updating…' : '+ Follow'}</span>
+                          </button>
+                        )
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats Bar */}
+              <div className="profile-stats-grid">
+                <div className="stat-box">
+                  <span className="stat-number">{profile.post_count ?? 0}</span>
+                  <span className="stat-label">Stories</span>
+                </div>
+                <div className="stat-box">
+                  {/* CRITICAL: destinations_visited is an array; use .length */}
+                  <span className="stat-number">{profile.destinations_visited?.length ?? 0}</span>
+                  <span className="stat-label">Destinations</span>
+                </div>
+                <button
+                  className={`stat-box stat-clickable ${socialTab === 'followers' ? 'active' : ''}`}
+                  onClick={() => setSocialTab(socialTab === 'followers' ? null : 'followers')}
+                >
+                  <span className="stat-number">{followers.length}</span>
+                  <span className="stat-label">Followers</span>
+                </button>
+                <button
+                  className={`stat-box stat-clickable ${socialTab === 'following' ? 'active' : ''}`}
+                  onClick={() => setSocialTab(socialTab === 'following' ? null : 'following')}
+                >
+                  <span className="stat-number">{following.length}</span>
+                  <span className="stat-label">Following</span>
+                </button>
+              </div>
+            </section>
+
+            {/* Edit Profile Drawer / Form */}
             {editing && (
-              <div className="form-card">
-                <h3 className="section-title">Edit Profile</h3>
-                {editError   && <p className="state-error">{editError}</p>}
-                {editSuccess && <p className="state-success">{editSuccess}</p>}
-                <form onSubmit={handleEditSave}>
-                  <label className="form-label">Full Name</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    value={editForm.full_name}
-                    onChange={(e) => setEditForm((p) => ({ ...p, full_name: e.target.value }))}
-                  />
-                  <label className="form-label">Bio</label>
-                  <textarea
-                    className="form-textarea"
-                    rows={3}
-                    value={editForm.bio}
-                    onChange={(e) => setEditForm((p) => ({ ...p, bio: e.target.value }))}
-                    placeholder="Tell travelers about yourself…"
-                  />
-                  <label className="form-label">Profile Picture</label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="form-input"
-                    onChange={(e) => setEditFile(e.target.files[0] || null)}
-                  />
-                  {editFile && <p className="form-hint">Selected: {editFile.name}</p>}
-                  <button type="submit" className="auth-btn" disabled={editSaving}>
-                    {editSaving ? 'Saving…' : 'Save Changes'}
-                  </button>
+              <div className="form-card edit-profile-card">
+                <h3 className="section-title">Edit Explorer Profile</h3>
+                {editError && <div className="auth-alert-error" role="alert">{editError}</div>}
+                {editSuccess && <div className="state-success" role="status">{editSuccess}</div>}
+
+                <form onSubmit={handleEditSave} noValidate>
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="edit_fullname">
+                      Full Name
+                    </label>
+                    <input
+                      id="edit_fullname"
+                      type="text"
+                      className="form-input"
+                      value={editForm.full_name}
+                      onChange={(e) => setEditForm((p) => ({ ...p, full_name: e.target.value }))}
+                      placeholder="Your full name"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="edit_bio">
+                      Bio
+                    </label>
+                    <textarea
+                      id="edit_bio"
+                      className="form-textarea"
+                      rows={3}
+                      value={editForm.bio}
+                      onChange={(e) => setEditForm((p) => ({ ...p, bio: e.target.value }))}
+                      placeholder="Where are you traveling next? What kind of journeys inspire you?"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="edit_photo">
+                      Update Profile Photo
+                    </label>
+                    <div className="edit-avatar-picker">
+                      {editPreview ? (
+                        <img src={editPreview} alt="Preview" className="edit-avatar-thumb" />
+                      ) : profile.profile_picture_url ? (
+                        <img src={mediaUrl(profile.profile_picture_url)} alt="Current" className="edit-avatar-thumb" />
+                      ) : null}
+                      <input
+                        id="edit_photo"
+                        type="file"
+                        accept="image/*"
+                        className="form-input"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-actions-row">
+                    <button type="submit" className="btn-primary-sm" disabled={editSaving}>
+                      {editSaving ? 'Saving…' : 'Save Changes'}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-secondary-sm"
+                      onClick={() => setEditing(false)}
+                      disabled={editSaving}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               </div>
             )}
 
-            {/* Followers / Following panel */}
+            {/* Followers / Following List Overlay */}
             {socialTab && (
-              <div className="social-panel">
-                <h3 className="section-title">
-                  {socialTab === 'followers' ? 'Followers' : 'Following'}
-                </h3>
-                {(socialTab === 'followers' ? followers : following).map((u) => (
-                  <div key={u.id} className="user-card">
-                    <div className="user-card-info">
-                      <Link to={`/profile/${u.id}`} className="user-card-name">
-                        {u.full_name || u.username}
+              <div className="social-panel-card">
+                <div className="social-panel-header">
+                  <h3 className="section-title">
+                    {socialTab === 'followers' ? `Followers (${followers.length})` : `Following (${following.length})`}
+                  </h3>
+                  <button
+                    className="btn-close-panel"
+                    onClick={() => setSocialTab(null)}
+                    aria-label="Close panel"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="social-users-list">
+                  {(socialTab === 'followers' ? followers : following).map((u) => {
+                    const initial = (u.full_name || u.username || '?')[0].toUpperCase();
+                    return (
+                      <Link
+                        key={u.id}
+                        to={`/profile/${u.id}`}
+                        className="social-user-item"
+                        onClick={() => setSocialTab(null)}
+                      >
+                        <div className="social-user-avatar">
+                          {u.profile_picture_url ? (
+                            <img
+                              src={mediaUrl(u.profile_picture_url)}
+                              alt={u.username}
+                              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                            />
+                          ) : (
+                            <span className="avatar-fallback">{initial}</span>
+                          )}
+                        </div>
+                        <div className="social-user-info">
+                          <span className="social-user-name">{u.full_name || u.username}</span>
+                          <span className="social-user-handle">@{u.username}</span>
+                        </div>
+                        <span className="social-user-arrow">→</span>
                       </Link>
-                      <span className="user-card-handle">@{u.username}</span>
-                    </div>
+                    );
+                  })}
+
+                  {(socialTab === 'followers' ? followers : following).length === 0 && (
+                    <p className="state-empty-subtle">
+                      No {socialTab === 'followers' ? 'followers' : 'following'} yet.
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* User's Travel Stories */}
+            <div className="profile-posts-header">
+              <h2 className="section-title">
+                {isOwnProfile ? 'My Travel Stories' : `Stories by ${profile.full_name || profile.username}`}
+              </h2>
+              <span className="badge-count">{posts.length}</span>
+            </div>
+
+            {postsLoading && (
+              <div className="skeleton-feed">
+                <div className="skeleton-card">
+                  <div className="skeleton-image"></div>
+                  <div className="skeleton-body">
+                    <div className="skeleton-line w-60"></div>
                   </div>
-                ))}
-                {(socialTab === 'followers' ? followers : following).length === 0 && (
-                  <p className="state-msg">None yet.</p>
+                </div>
+              </div>
+            )}
+
+            {!postsLoading && posts.length === 0 && (
+              <div className="state-card empty-card">
+                <div className="state-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+                <h3>No stories shared yet</h3>
+                <p>
+                  {isOwnProfile
+                    ? 'Start sharing your adventures and memories with fellow explorers.'
+                    : `${profile.full_name || profile.username} has not posted any travel stories yet.`}
+                </p>
+                {isOwnProfile && (
+                  <Link to="/create-post" className="btn-primary-sm">
+                    + Share a Story
+                  </Link>
                 )}
               </div>
             )}
 
-            {/* Posts by this user */}
-            <h3 className="section-title">Posts</h3>
-            {postsLoading && <p className="state-msg">Loading posts…</p>}
-            {!postsLoading && posts.length === 0 && (
-              <p className="state-msg">No posts yet.</p>
+            {!postsLoading && posts.length > 0 && (
+              <div className="post-list">
+                {posts.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    post={post}
+                    canDelete={isOwnProfile}
+                    onDelete={handleDeletePost}
+                  />
+                ))}
+              </div>
             )}
-            <div className="post-list">
-              {posts.map((post) => (
-                <PostCard
-                  key={post.id}
-                  post={post}
-                  canDelete={isOwnProfile}
-                  onDelete={handleDeletePost}
-                />
-              ))}
-            </div>
           </>
         )}
-      </div>
+      </main>
     </div>
   );
 }
