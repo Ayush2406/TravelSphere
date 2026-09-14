@@ -36,10 +36,15 @@ apiClient.interceptors.request.use(
 );
 
 // Response interceptor - global error handling
-// Chunk 1 will extend this to redirect to /login on 401.
+// On 401 Unauthorized, remove the stale token so the request interceptor
+// stops attaching it and the AuthContext restore does not retry endlessly.
+// Navigation to /login is handled by ProtectedRoute (router-level), not here.
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error?.response?.status === 401) {
+      localStorage.removeItem('access_token');
+    }
     return Promise.reject(error);
   }
 );
