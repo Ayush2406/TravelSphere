@@ -17,3 +17,6 @@ Worked on the frontend development workflow and AI-assisted coding process. Star
 
 ## 6–7 September 2026
 Reviewed and refined the TravelSphere use-case and DFD diagrams, including Level 0 and Level 1. Also investigated GitHub branches, PRs, forks, and contribution-graph behaviour.
+
+## 8–15 September 2026
+Continued working on the Travel Sphere prototype and development workflow. Worked on frontend-backend integration, GitHub commits and pull requests, and reviewed issues related to running the project locally when the backend was not available. Worked on frontend fixes involving profile, explore, post components, and media URL handling. Also worked on the project Gantt chart and planning, including backend responsibilities and an overall target completion around mid-November. Prepared the structure and content for the 4-slide prototype presentation, focusing on the implemented features, user flow, React frontend, FastAPI backend, APIs, database, and current project progress.
