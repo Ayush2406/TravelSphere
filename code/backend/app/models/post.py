@@ -4,7 +4,10 @@ from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 
 from app.database import Base
+<<<<<<< HEAD
 from app.models.destination import Destination
+=======
+>>>>>>> origin/niharika
 
 
 class Post(Base):
