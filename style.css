@@ -807,8 +807,8 @@ body {
 }
 
 .team-avatar {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   background: rgba(0, 119, 182, 0.1);
   color: var(--primary);
   border-radius: 50%;
@@ -817,6 +817,14 @@ body {
   justify-content: center;
   font-size: 1.8rem;
   margin: 0 auto 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .team-card h3 {
