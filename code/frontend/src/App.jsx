@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute       from './components/ProtectedRoute';
 import LoginPage            from './pages/LoginPage';
@@ -10,11 +10,25 @@ import CreatePostPage       from './pages/CreatePostPage';
 import PostDetailPage       from './pages/PostDetailPage';
 import ProfilePage          from './pages/ProfilePage';
 import DestinationDetailPage from './pages/DestinationDetailPage';
+import IntroCanvas from './components/intro/IntroCanvas';
+
+function IntroHome() {
+  const navigate = useNavigate();
+
+  return (
+    <IntroCanvas
+      onExplore={() => navigate('/explore')}
+      onLogin={() => navigate('/login')}
+      onCreateAccount={() => navigate('/register')}
+    />
+  );
+}
 
 /**
  * App.jsx - Root component with full MVP routing.
  *
  * Public routes (no auth required by API):
+ *   /               → IntroCanvas   (intro and landing screen)
  *   /login           → LoginPage
  *   /register        → RegisterPage
  *   /explore         → ExplorePage
@@ -23,7 +37,7 @@ import DestinationDetailPage from './pages/DestinationDetailPage';
  *   /destination/:destinationId → DestinationDetailPage
  *
  * Protected routes (Bearer token required):
- *   /               → FeedPage      (GET /feed requires auth)
+ *   /feed           → FeedPage      (GET /feed requires auth)
  *   /create-post    → CreatePostPage
  *
  * AuthProvider wraps the entire tree — every component can call useAuth().
@@ -34,6 +48,7 @@ export default function App() {
     <AuthProvider>
       <Routes>
         {/* ── Public ── */}
+        <Route path="/"         element={<IntroHome />} />
         <Route path="/login"    element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
@@ -45,7 +60,7 @@ export default function App() {
 
         {/* ── Protected ── */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/"            element={<FeedPage />} />
+          <Route path="/feed"        element={<FeedPage />} />
           <Route path="/create-post" element={<CreatePostPage />} />
         </Route>
 

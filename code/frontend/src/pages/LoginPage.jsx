@@ -28,7 +28,7 @@ export default function LoginPage() {
     setSubmitting(true);
     try {
       await login(form);
-      navigate('/', { replace: true });
+      navigate('/feed', { replace: true });
     } catch (err) {
       setError(formatError(err, 'Login failed. Please check your credentials.'));
     } finally {

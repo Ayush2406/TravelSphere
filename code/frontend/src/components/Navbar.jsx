@@ -23,6 +23,7 @@ export default function Navbar() {
 
   const navLinks = user
     ? [
+        { label: 'FEED', path: '/feed' },
         { label: 'EXPLORE', path: '/explore' },
         { label: 'CREATE', path: '/create-post' },
         { label: 'PROFILE', path: `/profile/${user.id}` },
